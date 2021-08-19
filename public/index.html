@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+  <title>Turnos</title>
+</head>
+
+<body class="leading-normal tracking-normal bg-gray-100 font-nunito">
+
+  <div class="flex flex-wrap md:flex-row-reverse">
+
+    <!--Main Content-->
+    <main class="w-full bg-gray-100 md:w-4/5">
+
+      <div class="px-6 pt-16 bg-gray-100 contenedor">
+
+        <!-- CREAR TURNOS -->
+        <div id="crearTurnos" class="mx-auto">
+          <div class="mt-5 md:mt-0 sm:border-b-0">
+
+            <h2 id="h2" class="my-5 text-2xl font-bold text-center">Cargue un nuevo Turno</h2>
+
+            <form id="formulario" action="#" method="POST">
+
+
+              <div id="datos-turno" class="grid grid-cols-6 gap-6 px-4 py-5 sm:p-6">
+
+                <div class="col-span-6 sm:col-span-3">
+                  <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre completo</label>
+                  <input type="text" name="nombre" id="nombre" autocomplete="name" min="2021-8-4"
+                    class="block w-full mt-1 bg-gray-100 border border-gray-300 border-gray-400 rounded-md shadow-sm h-9 sm:text-sm"
+                    placeholder="Ingrese su nombre">
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                  <label for="plan" class="block text-sm font-medium text-gray-700">Obra Social</label>
+                  <select id="plan" name="plan"
+                    class="block w-full px-3 py-2 mt-1 bg-white bg-gray-100 border border-gray-300 rounded-md shadow-sm h-9 sm:text-sm">
+                    <option value=""> - Seleccionar - </option>
+                    <option value="Consulta">Particular</option>
+                    <option value="Osde">Osde</option>
+                    <option value="Medicus">Medicus</option>
+                    <option value="Omint">Omint</option>
+                    <option value="Prevención Salud">Prevención Salud</option>
+                    <option value="Avalian">Avalian</option>
+                    <option value="Galeno">Galeno</option>
+                    <option value="PreMedic">PreMedic</option>
+                    <option value="Sancor Salud">Sancor Salud</option>
+                    <option value="Plan de Salud Hospital Italiano">Plan de Salud Hospital Italiano</option>
+                    <option value="Medifé">Medifé</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                  <label for="telefono" class="block text-sm font-medium text-gray-700">Telefono</label>
+
+                  <input type="tel" name="telefono" id="telefono" autocomplete="tel"
+                    class="block w-full mt-1 bg-gray-100 border border-gray-300 border-gray-400 rounded-md shadow-sm h-9 sm:text-sm"
+                    placeholder="Número de teléfono">
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                  <label for="mail" class="block text-sm font-medium text-gray-700">Dirección Email</label>
+                  <input type="text" name="mail" id="mail" autocomplete="email"
+                    class="block w-full mt-1 bg-gray-100 border border-gray-300 border-gray-400 rounded-md shadow-sm h-9 sm:text-sm"
+                    placeholder="Dirección de correo electrónico">
+                </div>
+
+                <div class="col-span-6 sm:col-span-6 lg:col-span-2">
+                  <label for="fecha" class="block text-sm font-medium text-gray-700">Fecha del turno</label>
+                  <input type="date" name="fecha" id="fecha"
+                    class="block w-full mt-1 bg-gray-100 border border-gray-300 border-gray-400 rounded-md shadow-sm h-9 sm:text-sm">
+                </div>
+
+                <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                  <label for="hora" class="block text-sm font-medium text-gray-700">Hora del turno</label>
+                  <input type="time" name="hora" id="hora"
+                    class="block w-full mt-1 bg-gray-100 border border-gray-300 border-gray-400 rounded-md shadow-sm h-9 sm:text-sm">
+                </div>
+
+                <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                  <label for="tipo" class="block text-sm font-medium text-gray-700">Tipo de consulta</label>
+                  <select id="tipo" name="tipo"
+                    class="block w-full px-3 py-2 mt-1 bg-white bg-gray-100 border border-gray-300 border-gray-400 rounded-md shadow-sm h-9 sm:text-sm">
+                    <option value=""> - Seleccionar - </option>
+                    <option value="Consulta">Consulta</option>
+                    <option value="Arreglo">Arreglo</option>
+                    <option value="Extracción">Extracción</option>
+                    <option value="Ortodoncia">Ortodoncia</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                </div>
+
+                <div class="col-span-6 sm:col-span-3 lg:col-span-4">
+                  <label for="comentarios" class="block text-sm font-medium text-gray-700">Comentarios</label>
+                  <textarea
+                    class="w-full col-span-2 mt-1 bg-gray-100 border border-gray-300 border-gray-400 rounded-md shadow-sm sm:text-sm"
+                    name="comentarios" id="comentarios" cols="30" rows="4"></textarea>
+                </div>
+
+                <div class="col-span-6 text-left">
+                  <button type="submit" id="btn"
+                    class="inline-flex items-center px-2 py-2 text-sm font-medium font-bold text-white rounded-full shadow-sm bg-azul mb-14 md:mb-0 hover:bg-azulClaro hover:shadow-xl">
+                    Crear turno <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- LISTA DE TURNOS -->
+        <div id="listarTurnos" class="container px-6 bg-gray-100">
+          <div class="flex flex-col items-center form-group">
+            <h2 class="my-5 text-2xl font-bold text-center">Lista de turnos</h2>
+            <img id="turnosImg" class="w-80 mt-14" src="img/nodate.svg" alt="imagen para turnos vacios">
+            <p id="turnosP" class="text-sm font-light text-center">Sin turnos</p>
+            <ul id="turnos" class="grid grid-cols-1 gap-5 md:grid-cols-2 lista-turnos"></ul>
+          </div>
+        </div>
+
+        <!-- BUSCAR TURNOS -->
+        <div id="buscarTurnos" class="container px-6 bg-gray-100">
+          <div class="flex flex-col items-center form-group">
+            <h2 class="my-5 text-2xl font-bold text-center">Buscar un turno</h2>
+
+
+            <form id="formularioBuscar" action="#" method="POST">
+              <div id="datos-turno" class="grid grid-cols-6 gap-6 px-4 py-5 sm:p-6">
+
+                <div class="col-span-6 sm:col-span-2 lg:col-span-2">
+                  <label for="nombre" class="block text-sm font-medium text-gray-700">Filtrar por nombre</label>
+                  <input type="text" name="nombre" id="nombre" autocomplete="name" min="2021-8-4"
+                    class="block w-full mt-1 bg-gray-100 border border-gray-300 border-gray-400 rounded-md shadow-sm h-9 sm:text-sm"
+                    placeholder="Ingrese su nombre">
+                </div>
+
+                <div class="col-span-6 sm:col-span-2 lg:col-span-2">
+                  <label for="fecha" class="block text-sm font-medium text-gray-700">Filtrar por Fecha</label>
+                  <input type="date" name="fecha" id="fecha"
+                    class="block w-full mt-1 bg-gray-100 border border-gray-300 border-gray-400 rounded-md shadow-sm h-9 sm:text-sm">
+                </div>
+
+                <div class="col-span-6 sm:col-span-2 lg:col-span-2">
+                  <label for="tipo" class="block text-sm font-medium text-gray-700">Filtrar por tipo de consulta</label>
+                  <select id="tipo" name="tipo"
+                    class="block w-full px-3 py-2 mt-1 bg-white bg-gray-100 border border-gray-300 border-gray-400 rounded-md shadow-sm h-9 sm:text-sm">
+                    <option value=""> - Seleccionar - </option>
+                    <option value="Consulta">Consulta</option>
+                    <option value="Arreglo">Arreglo</option>
+                    <option value="Extracción">Extracción</option>
+                    <option value="Ortodoncia">Ortodoncia</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+
+
+            <img id="turnosImg" class="m-auto w-80" src="img/search.svg" alt="imagen buscar turnos">
+
+            <ul id="turnos" class="self-start list-group lista-turnos"></ul>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!--Sidebar-->
+    <div
+      class="fixed bottom-0 w-full h-16 px-2 text-center bg-gray-900 md:w-1/5 md:bg-gray-900 md:pt-8 md:top-0 md:left-0 md:h-screen md:border-r-4 md:border-gray-600">
+      <div class="mx-auto md:relative lg:float-right lg:px-6">
+
+        <h1 class="hidden mb-5 text-2xl font-bold text-left text-white md:block">Turnos App</h1>
+
+        <img class="hidden md:block" src="img/turn.svg" alt="">
+
+        <ul class="flex flex-row text-center list-reset md:flex-col md:text-left">
+
+          <li id="crear" class="flex-1 mr-3 md:mt-10">
+            <a href="#"
+              class="block py-1 pl-1 text-gray-800 no-underline align-middle border-b-2 border-gray-800 md:py-3 hover:text-pink-500 md:border-gray-900 hover:border-pink-500">
+              <i class="pr-0 fas fa-plus md:pr-3"></i><span
+                class="block pb-1 text-xs text-gray-400 md:pb-0 md:text-base md:text-gray-200 md:inline-block">Cargar
+                turnos</span>
+            </a>
+          </li>
+          <li id="listar" class="flex-1 mr-3 md:mt-10">
+            <a href="#"
+              class="block py-1 pl-1 text-gray-800 no-underline align-middle border-b-2 border-gray-800 md:py-3 hover:text-pink-500 md:border-gray-900 hover:border-pink-500"><i
+                id="icono" class="pr-0 fas fa-list-ul md:pr-3"></i><span id="span"
+                class="block pb-1 text-xs text-gray-400 md:pb-0 md:text-base md:text-gray-200 md:inline-block">Listar
+                turnos</span>
+            </a>
+          </li>
+          <li id="buscar" class="flex-1 mr-3 md:mt-10">
+            <a href="#"
+              class="block py-1 pl-1 text-gray-800 no-underline align-middle border-b-2 border-gray-800 md:py-3 hover:text-pink-500 md:border-gray-900 hover:border-pink-500">
+              <i class="pr-0 fas fa-search md:pr-3"></i><span
+                class="block pb-1 text-xs text-gray-400 md:pb-0 md:text-base md:text-gray-200 md:inline-block">Buscar</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-analytics.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyB-RFgRAyYiRqRXcCS7iV_GxAWsGUToWhs",
+      authDomain: "turnosappod.firebaseapp.com",
+      projectId: "turnosappod",
+      storageBucket: "turnosappod.appspot.com",
+      messagingSenderId: "289912126755",
+      appId: "1:289912126755:web:4cd1395acccba6bf4ce096",
+      measurementId: "G-3E0L5S7Y2T"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/app.js"></script>
+
+
+</body>
+
+</html>
