@@ -142,22 +142,26 @@
             <form id="formularioBuscar" action="#" method="POST">
               <div id="datos-turno" class="grid grid-cols-6 gap-6 px-4 py-5 sm:p-6">
 
-                <div class="col-span-6 sm:col-span-2 lg:col-span-2">
-                  <label for="nombre" class="block text-sm font-medium text-gray-700">Filtrar por nombre</label>
-                  <input type="text" name="nombre" id="nombre" autocomplete="name" min="2021-8-4"
-                    class="block w-full mt-1 bg-gray-100 border border-gray-300 border-gray-400 rounded-md shadow-sm h-9 sm:text-sm"
-                    placeholder="Ingrese su nombre">
+                <div class="col-span-6 text-lg text-center text-azul">
+                  <h3>Filtrar por:</h3>
                 </div>
 
                 <div class="col-span-6 sm:col-span-2 lg:col-span-2">
-                  <label for="fecha" class="block text-sm font-medium text-gray-700">Filtrar por Fecha</label>
-                  <input type="date" name="fecha" id="fecha"
+                  <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
+                  <input type="text" name="buscarNombre" id="buscarNombre" autocomplete="name" min="2021-8-4"
+                    class="block w-full mt-1 bg-gray-100 border border-gray-300 border-gray-400 rounded-md shadow-sm h-9 sm:text-sm"
+                    placeholder="Nombre a buscar">
+                </div>
+
+                <div class="col-span-6 sm:col-span-2 lg:col-span-2">
+                  <label for="fecha" class="block text-sm font-medium text-gray-700">Fecha</label>
+                  <input type="date" name="buscarFecha" id="buscarFecha"
                     class="block w-full mt-1 bg-gray-100 border border-gray-300 border-gray-400 rounded-md shadow-sm h-9 sm:text-sm">
                 </div>
 
                 <div class="col-span-6 sm:col-span-2 lg:col-span-2">
-                  <label for="tipo" class="block text-sm font-medium text-gray-700">Filtrar por tipo de consulta</label>
-                  <select id="tipo" name="tipo"
+                  <label for="tipo" class="block text-sm font-medium text-gray-700">Tipo de consulta</label>
+                  <select id="buscarTipo" name="buscarTipo"
                     class="block w-full px-3 py-2 mt-1 bg-white bg-gray-100 border border-gray-300 border-gray-400 rounded-md shadow-sm h-9 sm:text-sm">
                     <option value=""> - Seleccionar - </option>
                     <option value="Consulta">Consulta</option>
@@ -227,7 +231,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
   <script src="js/firebase.js"></script>
   <script src="js/jquery-3.6.0.min.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/app.js" type="module"></script>
 
 
 </body>
