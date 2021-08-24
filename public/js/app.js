@@ -1,7 +1,6 @@
-//      VARIABLES GLOBALES
+/*------------ VARIABLES GLOBALES Y SELECTORES ------------*/
 let editando;
 let DB;
-
 const crear = document.querySelector('#crear');
 const listar = document.querySelector('#listar');
 const buscar = document.querySelector('#buscar');
@@ -11,8 +10,7 @@ const buscarTurnos = document.querySelector('#buscarTurnos');
 const btnGuardar = document.getElementById('btn');
 
 
-//Cuando el documento este listo se crea la conexión a la base de datos
-//IndexDB y tambien se ejecuta el código para la creación de la misma una única vez
+/*------------ DOMContentLoader ------------*/
 $(() => {
     $('#crearTurnos').show();
     ui.imprimirTurnos();
@@ -20,7 +18,7 @@ $(() => {
 });
 
 
-//      CLASES
+/*------------ CLASES ------------*/
 class Turnos {
     constructor() {
         this.turnos = [];
@@ -54,7 +52,6 @@ class Turnos {
 class InterfazUsuario {
 
     imprimirAlerta(mensaje, tipo) {
-
         const divMensaje = $('<div style="display: none"></div>');
         divMensaje.addClass('text-center m-1');
 
@@ -78,6 +75,7 @@ class InterfazUsuario {
         agregarInfoTurnosVacios();
         this.limpiarHTML();
 
+        //Trabajando con firebase
         let userDataRef = firebase.database().ref("turnos").orderByKey();
         userDataRef.once("value").then(function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
@@ -137,7 +135,6 @@ class InterfazUsuario {
                     eliminarTurno(id);
                 });
 
-
                 //Boton editar turno
                 const btnEditar = $('<button></button>');
                 btnEditar.addClass('h-10 self-end inline-flex justify-center items-center py-2 px-2 shadow-sm text-sm font-medium rounded-full text-white bg-azul hover:bg-azulClaro hover:shadow-xl w-32 font-bold');
@@ -165,7 +162,6 @@ class InterfazUsuario {
                 divTurno.fadeIn(500);
             });
         });
-
     }
 
     limpiarHTML() {
@@ -174,16 +170,15 @@ class InterfazUsuario {
 }
 
 
-//      INSTANCIAS DE LAS CLASES
+/*------------ INSTANCIAS DE LA CLASE ------------*/
 const ui = new InterfazUsuario();
 const administrarTurnos = new Turnos();
 
 
-//      EVENT LISTENERS
+/*------------ EVENT LISTENERS ------------*/
 eventListeners();
 
 function eventListeners() {
-
     $('#nombre').on('input', datosTurno);
     $('#plan').on('input', datosTurno);
     $('#telefono').on('input', datosTurno);
@@ -200,7 +195,7 @@ function eventListeners() {
     buscar.addEventListener('click', mostrarBuscar);
 }
 
-//      OBJETO CON INFORMACIÓN DE LA CLASE
+/*------------ OBJETO CON LA INFORMACIÓN PARA LAS CLASES ------------*/
 const turnoObj = {
     nombre: '',
     plan: '',
@@ -212,12 +207,14 @@ const turnoObj = {
     comentarios: ''
 }
 
-//      FUNCIONES
+/*------------ FUNCIONES ------------*/
+
 //Funcion que captura los datos del turno
 function datosTurno(e) {
     turnoObj[e.target.name] = e.target.value;
 }
 
+//Funcion para reiniciar el objeto
 function reiniciarObjeto() {
     turnoObj.nombre = '';
     turnoObj.plan = '';
@@ -229,6 +226,7 @@ function reiniciarObjeto() {
     turnoObj.comentarios = '';
 }
 
+//Función para crear un nuevo turno, validar y editar un turno
 function nuevoTurno(e) {
     e.preventDefault();
 
@@ -243,7 +241,6 @@ function nuevoTurno(e) {
         tipo,
         comentarios
     } = turnoObj;
-
 
     //Validando los campos del formularios
     if (nombre === '' || plan === '' || telefono === '' || mail === '' || fecha === '' || hora === '' || tipo === '' || comentarios === '') {
@@ -307,8 +304,8 @@ function nuevoTurno(e) {
     ui.imprimirTurnos();
 }
 
+//Funcion para eliminar un turno
 function eliminarTurno(id) {
-
     firebase.database().ref('turnos/' + id).remove();
 
     //Eliminar turno del array de turnos
@@ -323,6 +320,7 @@ function eliminarTurno(id) {
     agregarInfoTurnosVacios();
 }
 
+//Función que rellena el formulario cuando se vaya a editar
 function cargarEdicion(turno) {
     crearTurnos.style.display = "block";
     listarTurnos.style.display = "none";
@@ -372,6 +370,7 @@ function cargarEdicion(turno) {
     editando = true;
 }
 
+//Funcion que muestra una imagen cuandono hay turnos cargados
 function agregarInfoTurnosVacios() {
     //Acceder a servicio
     const data = firebase.database();
@@ -389,6 +388,7 @@ function agregarInfoTurnosVacios() {
     });
 }
 
+//Funcion para actualizar los datos en la base de datos con una edición
 function escribirDatos(turno) {
     firebase.database().ref('turnos/' + turno.id).update({
         nombre: turno.nombre,
@@ -402,6 +402,7 @@ function escribirDatos(turno) {
     });
 }
 
+//Funcion para cuando la aplicación iniciar
 function inicioApp() {
     $('#crear i').addClass("text-pink-400");
     $('#crear').addClass("border-b-2 border-pink-500");
@@ -411,6 +412,7 @@ function inicioApp() {
     $('#buscar').removeClass("border-b-2 border-pink-500");
 }
 
+//Funcion con expreción regular para validar un mail
 function validarEmail(campo) {
     const mensaje = campo;
 
@@ -424,6 +426,7 @@ function validarEmail(campo) {
     }
 }
 
+//Función para mostrar la página para crear turnos
 function mostrarCrear() {
     crearTurnos.style.display = "block";
     listarTurnos.style.display = "none";
@@ -436,6 +439,7 @@ function mostrarCrear() {
     $('#buscar').removeClass("border-b-2 border-pink-500");
 }
 
+//Función para mostrar la página de listar
 function mostrarListar() {
     crearTurnos.style.display = "none";
     listarTurnos.style.display = "block";
@@ -448,6 +452,7 @@ function mostrarListar() {
     $('#buscar').removeClass("border-b-2 border-pink-500");
 }
 
+//Función para mostrar la página de búsqueda
 function mostrarBuscar() {
     crearTurnos.style.display = "none";
     listarTurnos.style.display = "none";
