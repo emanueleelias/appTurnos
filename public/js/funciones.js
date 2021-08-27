@@ -23,12 +23,6 @@ const turnoObj = {
     comentarios: ''
 }
 
-/* export const datosBusqueda = {
-    nombre: '',
-    fecha: '',
-    tipoConsulta: ''
-} */
-
 //Funcion que captura los datos del turno
 export function datosTurno(e) {
     turnoObj[e.target.name] = e.target.value;
@@ -286,29 +280,31 @@ export function mostrarBuscar() {
 }
 
 //Funciones para la busqueda
-/* export function filtrarTurno(nombreABuscar) {
-
-    let nombres = [];
-    let userDataRef = firebase.database().ref("turnos").orderByKey();
-    userDataRef.once("value").then(function (snapshot) {
-
-        snapshot.forEach(function (childSnapshot) {
-            
-            nombres.push(childSnapshot.val().nombre);
-        });
-
-        
+export function buscar(campo, valor) {
+    $('#turnosEncontrados').empty();
+    let ref = firebase.database().ref("turnos");
+    ref.orderByChild(campo).equalTo(valor).on("child_added", function(snapshot) {
+        $('#sinResultados').fadeOut(1000);
+        $('#buscarImg').fadeOut(1000);
+        let nombre = snapshot.val().nombre;
+        let fecha = snapshot.val().fecha;
+        let hora = snapshot.val().hora;
+        let tipo = snapshot.val().tipo;
+        const divBusqueda= $('<div></div>');
+        const p = $('<p></p>');
+        p.addClass('text-center mb-2 text-sm');
+        p.html(`<b>${nombre}</b> tiene turno el <b>${fecha}</b> a las ${hora} para <b>${tipo}</b>`);
+        $('#turnosEncontrados').append(p);
+        divBusqueda.append(p);
+        $('#turnosEncontrados').prepend(divBusqueda).fadeIn(500);
     });
-
-console.log(nombreABuscar);
-let resultado = nombres.filter(filtrarNombre);
-    console.log(resultado);
 }
 
-function filtrarNombre(turno) {
-    const { nombre } = datosBusqueda;
-    if (nombre){
-        return turno.nombre === nombre;
-    }
-    return turno;
-} */
+export function comprobarBusqueda() {
+    if($("#turnosEncontrados").children().length != 0) {
+        console.log('Yes content');
+      } else {    
+        $('#sinResultados').fadeIn(1000);
+        $('#buscarImg').fadeIn(1000);
+      }
+}

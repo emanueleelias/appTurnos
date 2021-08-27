@@ -1,4 +1,11 @@
-import { datosTurno, nuevoTurno, mostrarCrear, mostrarListar, mostrarBuscar } from '../funciones.js';
+import { 
+    datosTurno, 
+    nuevoTurno, 
+    mostrarCrear, 
+    mostrarListar, 
+    mostrarBuscar, 
+    buscar, 
+    comprobarBusqueda} from '../funciones.js';
 
 
 class App {
@@ -27,18 +34,23 @@ class App {
         $('#listar').click(mostrarListar);
         $('#buscar').click(mostrarBuscar);
 
-/*         $('#buscarNombre').on('input', e => {
-            let nombre = datosBusqueda.nombre = e.target.value;
-            filtrarTurno(nombre);
-        });
-        $('#buscarFecha').on('change', e => {
-            datosBusqueda.fecha = e.target.value;
-            console.log(datosBusqueda);
-        });
+        //Eventos para la busqueda según el tipo de consulta o la fecha
         $('#buscarTipo').on('change', e => {
-            datosBusqueda.tipoConsulta = e.target.value;
-            console.log(datosBusqueda);
-        }); */
+            $("#buscarFecha[type=date]").val("");
+            let tipo = e.target.value;
+            buscar('tipo', tipo);
+            setTimeout(() => {
+                comprobarBusqueda();
+            }, 2500);
+        }); 
+        $('#buscarFecha').on('change', e => {
+            let fecha = e.target.value;
+            $('#buscarTipo').val('0');
+            buscar('fecha', fecha);
+            setTimeout(() => {
+                comprobarBusqueda();
+            }, 2500);
+        }); 
     }
 }
 

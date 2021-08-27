@@ -146,24 +146,17 @@
                   <h3>Filtrar por:</h3>
                 </div>
 
-                <div class="col-span-6 sm:col-span-2 lg:col-span-2">
-                  <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
-                  <input type="text" name="buscarNombre" id="buscarNombre" autocomplete="name" min="2021-8-4"
-                    class="block w-full mt-1 bg-gray-100 border border-gray-300 border-gray-400 rounded-md shadow-sm h-9 sm:text-sm"
-                    placeholder="Nombre a buscar">
-                </div>
-
-                <div class="col-span-6 sm:col-span-2 lg:col-span-2">
+                <div class="col-span-6 sm:col-span-3 lg:col-span-3">
                   <label for="fecha" class="block text-sm font-medium text-gray-700">Fecha</label>
                   <input type="date" name="buscarFecha" id="buscarFecha"
                     class="block w-full mt-1 bg-gray-100 border border-gray-300 border-gray-400 rounded-md shadow-sm h-9 sm:text-sm">
                 </div>
 
-                <div class="col-span-6 sm:col-span-2 lg:col-span-2">
+                <div class="col-span-6 sm:col-span-3 lg:col-span-3">
                   <label for="tipo" class="block text-sm font-medium text-gray-700">Tipo de consulta</label>
                   <select id="buscarTipo" name="buscarTipo"
                     class="block w-full px-3 py-2 mt-1 bg-white bg-gray-100 border border-gray-300 border-gray-400 rounded-md shadow-sm h-9 sm:text-sm">
-                    <option value=""> - Seleccionar - </option>
+                    <option value="0"> - Seleccionar - </option>
                     <option value="Consulta">Consulta</option>
                     <option value="Arreglo">Arreglo</option>
                     <option value="Extracción">Extracción</option>
@@ -174,10 +167,10 @@
               </div>
             </form>
 
+            <p id="sinResultados" class="text-center">Sin resultados</p>
+            <img id="buscarImg" class="m-auto w-80" src="img/search.svg" alt="imagen buscar turnos">
 
-            <img id="turnosImg" class="m-auto w-80" src="img/search.svg" alt="imagen buscar turnos">
-
-            <ul id="turnos" class="self-start list-group lista-turnos"></ul>
+            <div id="turnosEncontrados"></div>
           </div>
         </div>
 
