@@ -1,17 +1,22 @@
 import Turnos from './clases/Turnos.js'
 import InterfazUsuario from './clases/InterfazUsuario.js';
 
+//Instancias de las las clasese a utilizar
 const ui = new InterfazUsuario();
 const administrarTurnos = new Turnos();
 
+//Variable booleana con la que sabremos si estamos en modo edición o no.
 let editando;
 
+//Cuando el documento este listo se van a cargar los turnos
 $(() => {
     $('#crearTurnos').show();
     ui.imprimirTurnos();
-    inicioApp();
+    menuPorDefectoAMostrar();
 });
 
+/*Objeto que va a contener los datos del formulario
+cada vez que se escriba en los inputs o se seleccione un elemento se van a ir guardando los datos en este objeto*/
 const turnoObj = {
     nombre: '',
     plan: '',
@@ -21,11 +26,6 @@ const turnoObj = {
     hora: '',
     tipo: '',
     comentarios: ''
-}
-
-//Funcion que captura los datos del turno
-export function datosTurno(e) {
-    turnoObj[e.target.name] = e.target.value;
 }
 
 //Funcion para reiniciar el objeto
@@ -38,6 +38,11 @@ function reiniciarObjeto() {
     turnoObj.hora = '';
     turnoObj.tipo = '';
     turnoObj.comentarios = '';
+}
+
+//Funcion que captura los datos del turno
+export function datosTurno(e) {
+    turnoObj[e.target.name] = e.target.value;
 }
 
 //Función para crear un nuevo turno, validar y editar un turno
@@ -68,11 +73,10 @@ export function nuevoTurno(e) {
 
     if (editando) {
 
-        //Pasar el objeto de la cita a edición
+        //Pasar el objeto del turno a edición
         administrarTurnos.editarTurno({
             ...turnoObj
         });
-
         escribirDatos(turnoObj);
 
         console.log(turnoObj);
@@ -89,57 +93,50 @@ export function nuevoTurno(e) {
         //Quitando modo edición
         editando = false;
     } else {
-        //Agregar un id unico al objeto para poder modificar un turno o eliminarlo
+        //Agregar un id único al objeto para poder modificar un turno o eliminarlo
+        //En este caso se utiliza Date.now().
         turnoObj.id = Date.now();
 
         //Creando un nuevo turno
         administrarTurnos.agregarTurno({
             ...turnoObj
         });
-
         var turnoId = turnoObj.id;
         firebase.database().ref('turnos/' + turnoId).set(turnoObj);
 
-
         //Mensaje de turno agregado correctamente
         ui.imprimirAlerta('El turno se agrego correctamente', 'correcto');
-
         $('#turnosImg').hide();
         $('#turnosP').hide();
     }
 
     //Reiniciar Objeto
     reiniciarObjeto();
-
     //Resetear formulario
     document.querySelector('#formulario').reset();
-
     //Mostrar el HTML de los turnos
     ui.imprimirTurnos();
 }
 
 //Funcion para eliminar un turno
 export function eliminarTurno(id) {
+    //Utilizando la base de datos
     firebase.database().ref('turnos/' + id).remove();
-
     //Eliminar turno del array de turnos
     administrarTurnos.eliminarTurno(id);
-
     //Mostrar mensaje
     ui.imprimirAlerta('El turno se eliminó correctamente', 'correcto');
-
     //Volver a imprimir los turnos en el HTML
     ui.imprimirTurnos();
-
     agregarInfoTurnosVacios();
 }
 
 //Función que rellena el formulario cuando se vaya a editar
 export function cargarEdicion(turno) {
+    //Se muestra la sección de edición
     $('#crearTurnos').css('display', 'block');
     $('#listarTurnos').css('display', 'none');
     $('#buscarTurnos').css('display', 'none');
-
     //Desctructuring del objeto
     const {
         nombre,
@@ -216,8 +213,8 @@ function escribirDatos(turno) {
     });
 }
 
-//Funcion para cuando la aplicación iniciar
-function inicioApp() {
+//Funcion para cuando la aplicación inicia que pantalla va a mostrar.
+function menuPorDefectoAMostrar() {
     $('#crear i').addClass("text-pink-400");
     $('#crear').addClass("border-b-2 border-pink-500");
     $('#listar i').removeClass("text-pink-400");
@@ -226,10 +223,9 @@ function inicioApp() {
     $('#buscar').removeClass("border-b-2 border-pink-500");
 }
 
-//Funcion con expreción regular para validar un mail
+//Funcion con expreción regular para validar el e-mail
 function validarEmail(campo) {
     const mensaje = campo;
-
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     
     if( re.test(mensaje.toLowerCase()) ) {
@@ -240,7 +236,7 @@ function validarEmail(campo) {
     }
 }
 
-//Función para mostrar la página para crear turnos
+//Función para mostrar la sección para crear turnos
 export function mostrarCrear() {
     $('#crearTurnos').css('display', 'block');
     $('#listarTurnos').css('display', 'none');
@@ -253,7 +249,7 @@ export function mostrarCrear() {
     $('#buscar').removeClass("border-b-2 border-pink-500");
 }
 
-//Función para mostrar la página de listar
+//Función para mostrar la sección de listar
 export function mostrarListar() {
     $('#crearTurnos').css('display', 'none');
     $('#listarTurnos').css('display', 'block');
@@ -266,7 +262,7 @@ export function mostrarListar() {
     $('#buscar').removeClass("border-b-2 border-pink-500");
 }
 
-//Función para mostrar la página de búsqueda
+//Función para mostrar la sección de búsqueda
 export function mostrarBuscar() {
     $('#crearTurnos').css('display', 'none');
     $('#listarTurnos').css('display', 'none');
@@ -279,7 +275,7 @@ export function mostrarBuscar() {
     $('#buscar').addClass("border-b-2 border-pink-500");
 }
 
-//Funciones para la busqueda
+//Funcion para la busqueda
 export function buscar(campo, valor) {
     $('#turnosEncontrados').empty();
     let ref = firebase.database().ref("turnos");
@@ -300,6 +296,7 @@ export function buscar(campo, valor) {
     });
 }
 
+//Comprueba la busqueda si no hay resultados muestra la imagen y el texto sin resultados
 export function comprobarBusqueda() {
     if($("#turnosEncontrados").children().length != 0) {
         console.log('Yes content');

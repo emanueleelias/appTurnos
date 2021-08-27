@@ -1,7 +1,11 @@
-import { eliminarTurno, cargarEdicion, agregarInfoTurnosVacios } from '../funciones.js';
+import { 
+    eliminarTurno, 
+    cargarEdicion, 
+    agregarInfoTurnosVacios } from '../funciones.js';
 
 class InterfazUsuario {
 
+    //Imprime una alerta informando que todo salio bien o marcando un error
     imprimirAlerta(mensaje, tipo) {
         const divMensaje = $('<div style="display: none"></div>');
         divMensaje.addClass('text-center m-1');
@@ -15,13 +19,12 @@ class InterfazUsuario {
 
         //Agregando el mensaje
         divMensaje.prepend(mensaje);
-
         //Agregando al DOM
         $('#formulario').prepend(divMensaje);
-
         divMensaje.fadeIn(1000).delay(1500).fadeOut(1000);
     }
 
+    //Metodo que se encarga de imprimir los turnos - listarlos.
     imprimirTurnos() {
         agregarInfoTurnosVacios();
         this.limpiarHTML();
@@ -113,6 +116,7 @@ class InterfazUsuario {
         });
     }
 
+    //Metodo para limpiar el html de turnos
     limpiarHTML() {
         $('#turnos').empty();
     }

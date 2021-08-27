@@ -5,17 +5,14 @@ import {
     mostrarListar, 
     mostrarBuscar, 
     buscar, 
-    comprobarBusqueda} from '../funciones.js';
-
+    comprobarBusqueda } from '../funciones.js';
 
 class App {
-
     constructor() {
         this.initApp();
     }
 
     initApp() {
-        
         //inputs y datos de la aplicación
         $('#nombre').on('input', datosTurno);
         $('#plan').on('input', datosTurno);
